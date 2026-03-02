@@ -40,7 +40,7 @@ export default function HomePage() {
                 <div className="relative max-w-7xl mx-auto px-6 py-28 text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm mb-8">
                         <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-                        Available for new projects — March 2026
+                        Elite Solution USA LLC — Custom Software & Automation
                     </div>
                     <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
                         <span className="bg-gradient-to-r from-white via-indigo-200 to-purple-300 bg-clip-text text-transparent">
@@ -52,7 +52,7 @@ export default function HomePage() {
                         </span>
                     </h1>
                     <p className="text-gray-400 text-xl md:text-2xl max-w-3xl mx-auto mb-10 leading-relaxed">
-                        I build <strong className="text-white">custom software & automation</strong> that saves your team time, cuts costs, and grows your business — from client portals to AI-powered booking platforms.
+                        <strong className="text-white">Elite Solution USA LLC</strong> builds custom software & automation that saves your team time, cuts costs, and grows your business — from client portals to AI-powered platforms.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <a href="#projects" className="px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-lg transition-colors shadow-lg shadow-indigo-500/20">
@@ -82,7 +82,7 @@ export default function HomePage() {
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Project Showcase</h2>
                     <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Real solutions, real results. Each project was built for a real client — click any card to see what it does and the impact it delivered.
+                        Real solutions, real results. Every project is built by <strong className="text-white">Elite Solution USA LLC</strong> for real clients — click any card to see what it does and the impact it delivered.
                     </p>
                 </div>
 

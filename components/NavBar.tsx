@@ -11,9 +11,9 @@ export function NavBar() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-gray-800">
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">F</div>
-                    <span className="text-white font-semibold text-lg">Fadi Alwagfy</span>
-                    <span className="ml-2 text-xs text-indigo-400 font-medium px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">Portfolio</span>
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">E</div>
+                    <span className="text-white font-semibold text-lg">Elite Solution USA</span>
+                    <span className="ml-2 text-xs text-indigo-400 font-medium px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20">LLC</span>
                 </Link>
 
                 {/* Desktop nav */}
