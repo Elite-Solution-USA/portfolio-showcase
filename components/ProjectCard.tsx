@@ -8,6 +8,11 @@ export function ProjectCard({ project }: { project: Project }) {
         'Beauty Tech': 'bg-pink-500/10 text-pink-400 border-pink-500/20',
         'EdTech AI': 'bg-teal-500/10 text-teal-400 border-teal-500/20',
         'Industrial Automation': 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+        'Healthcare SaaS': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+        'Business SaaS': 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+        'Marine Tech': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+        'Smart Parking': 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+        'Professional Network': 'bg-orange-500/10 text-orange-400 border-orange-500/20',
     };
     const statusColor: Record<string, string> = {
         Production: 'bg-green-400',

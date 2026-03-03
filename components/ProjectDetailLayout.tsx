@@ -1,10 +1,16 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
 import { Project } from '@/data/projects';
 
-// Customer-friendly capability icons mapped to architecture layer names
-const capabilityIcons: Record<string, string> = {
-    default: '✅',
+const techCategoryColor: Record<string, string> = {
+    Backend: '#ef4444',
+    Frontend: '#61dafb',
+    Database: '#00758f',
+    Cloud: '#7c3aed',
+    AI: '#10b981',
+    Automation: '#ea4b71',
+    DevOps: '#4285f4',
 };
 
 export function ProjectDetailLayout({
@@ -16,22 +22,26 @@ export function ProjectDetailLayout({
     simulator: React.ReactNode;
     extraContent?: React.ReactNode;
 }) {
-    // Build a flat list of plain-language capabilities from architecture layers
+    // Build a flat list of customer-friendly capabilities from architecture layers
     const capabilities = project.architecture.flatMap(layer =>
         layer.components.filter(c =>
-            // Strip out any obviously internal/technical names
             !c.match(/API|SPA|Vite|Redis|MySQL|DB|u5636|\.env|Fail2Ban|SSL|TLS|CRUD|Worker|Schema|Migration/i)
         )
     );
 
     return (
         <div className="min-h-screen">
-            {/* Hero */}
+            {/* ── Hero ─────────────────────────────────────────── */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${project.gradientFrom}18 0%, #030712 60%)` }} />
+                {/* subtle grid */}
+                <div className="absolute inset-0 opacity-10" style={{
+                    backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                    backgroundSize: '60px 60px',
+                }} />
                 <div className="relative max-w-7xl mx-auto px-6 py-20">
                     <div className="mb-6">
-                        <Link href="/" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
+                        <Link href="/" className="inline-flex items-center gap-1.5 text-gray-500 hover:text-gray-300 text-sm transition-colors">
                             ← Back to Portfolio
                         </Link>
                     </div>
@@ -57,6 +67,19 @@ export function ProjectDetailLayout({
                             </div>
                             <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3">{project.name}</h1>
                             <p className="text-gray-400 text-lg max-w-2xl">{project.tagline}</p>
+
+                            {/* Live URL button */}
+                            {project.liveUrl && (
+                                <a
+                                    href={project.liveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-85 shadow-lg"
+                                    style={{ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})` }}
+                                >
+                                    <span>🔗</span> View Live Site
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -64,7 +87,7 @@ export function ProjectDetailLayout({
 
             <div className="max-w-7xl mx-auto px-6 pb-20 space-y-16">
 
-                {/* Results at a Glance */}
+                {/* ── Results at a Glance ───────────────────────── */}
                 <section>
                     <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-5">Results at a Glance</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -78,7 +101,7 @@ export function ProjectDetailLayout({
                     </div>
                 </section>
 
-                {/* Overview + Demo */}
+                {/* ── Overview + Demo ───────────────────────────── */}
                 <section className="grid md:grid-cols-2 gap-10">
                     <div>
                         <h2 className="text-2xl font-bold text-white mb-4">The Challenge We Solved</h2>
@@ -94,7 +117,66 @@ export function ProjectDetailLayout({
                     </div>
                 </section>
 
-                {/* What We Delivered — customer-friendly capabilities */}
+                {/* ── Tech Stack ────────────────────────────────── */}
+                {project.techStack.length > 0 && (
+                    <section>
+                        <h2 className="text-2xl font-bold text-white mb-2">Technology Stack</h2>
+                        <p className="text-gray-500 text-sm mb-6">The tools and technologies powering this solution.</p>
+                        <div className="flex flex-wrap gap-3">
+                            {project.techStack.map(tech => (
+                                <div
+                                    key={tech.name}
+                                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl border bg-gray-900"
+                                    style={{ borderColor: `${tech.color}30` }}
+                                >
+                                    <span
+                                        className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                                        style={{ background: tech.color }}
+                                    />
+                                    <span className="text-white text-sm font-medium">{tech.name}</span>
+                                    <span
+                                        className="text-xs px-2 py-0.5 rounded-md ml-1"
+                                        style={{ color: tech.color, background: `${tech.color}15` }}
+                                    >
+                                        {tech.category}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* ── Architecture Layers ───────────────────────── */}
+                <section>
+                    <h2 className="text-2xl font-bold text-white mb-2">System Architecture</h2>
+                    <p className="text-gray-500 text-sm mb-6">How the platform is structured, layer by layer.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {project.architecture.map(layer => (
+                            <div
+                                key={layer.layer}
+                                className="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-gray-700 transition-colors"
+                            >
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: layer.color }} />
+                                    <h3 className="text-white font-semibold text-sm">{layer.layer}</h3>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {layer.components.map(comp => (
+                                        <span
+                                            key={comp}
+                                            className="text-xs px-2.5 py-1 rounded-lg"
+                                            style={{ color: layer.color, background: `${layer.color}15` }}
+                                        >
+                                            {comp}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── What We Delivered ─────────────────────────── */}
                 {capabilities.length > 0 && (
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-2">What We Delivered</h2>
@@ -113,18 +195,24 @@ export function ProjectDetailLayout({
                     </section>
                 )}
 
-                {/* Extra content (e.g. workflow viewer for Ocean Marine) */}
+                {/* Extra content slot (e.g. WorkflowViewer for Ocean Marine) */}
                 {extraContent}
 
-                {/* CTA */}
-                <section className="rounded-3xl p-10 text-center" style={{ background: `linear-gradient(135deg, ${project.gradientFrom}12, ${project.gradientTo}12)`, border: `1px solid ${project.accentColor}25` }}>
+                {/* ── CTA ───────────────────────────────────────── */}
+                <section
+                    className="rounded-3xl p-10 text-center"
+                    style={{
+                        background: `linear-gradient(135deg, ${project.gradientFrom}12, ${project.gradientTo}12)`,
+                        border: `1px solid ${project.accentColor}25`,
+                    }}
+                >
                     <div className="text-4xl mb-4">{project.icon}</div>
                     <h2 className="text-2xl font-bold text-white mb-3">Want something like this?</h2>
                     <p className="text-gray-400 mb-6 max-w-lg mx-auto">
                         Every business has unique challenges. Let's talk about what a custom solution could do for yours.
                     </p>
                     <a
-                        href="mailto:contact@example.com"
+                        href="mailto:contact@elitesolutionusa.com"
                         className="inline-block px-8 py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90 shadow-lg"
                         style={{ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})` }}
                     >
