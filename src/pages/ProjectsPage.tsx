@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { projects } from "@/data/projects";
@@ -13,6 +13,15 @@ export default function ProjectsPage() {
   const { t } = useTranslation(["projects", "common"]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const [hasScrollHint, setHasScrollHint] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+    setHasScrollHint(!atEnd);
+  }, []);
 
   const filtered = projects.filter((p) => {
     const matchCat = activeCategory === "All" || p.category === activeCategory;
@@ -58,44 +67,95 @@ export default function ProjectsPage() {
 
       {/* ── FILTERS ───────────────────────────────────────────────── */}
       <div className="sticky top-20 z-30 bg-white border-b border-steel-200 shadow-sm">
-        <div className="section-container py-4 flex flex-col md:flex-row gap-4 items-start md:items-center">
-          {/* Search */}
-          <div className="relative flex-shrink-0 w-full md:w-72">
-            <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-steel-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        {/* Gold accent top line */}
+        <div className="h-0.5 bg-gold-500 w-full" />
+        <div className="section-container">
+          <div className="flex items-stretch gap-0">
+            {/* Search — underline style */}
+            <div className="relative flex-shrink-0 flex items-center py-4 pr-8 border-r border-steel-200">
+              <svg
+                className="w-3.5 h-3.5 text-steel-400 mr-2.5 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={t("projects:filter.search")}
+                className="w-44 text-xs font-medium text-steel-800 placeholder-steel-400 bg-transparent border-none outline-none focus:outline-none"
               />
-            </svg>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={t("projects:filter.search")}
-              className="w-full pl-10 pr-4 py-2.5 border border-steel-200 text-sm focus:outline-none focus:border-navy-800 text-steel-800 placeholder-steel-400 bg-white"
-            />
-          </div>
-          {/* Category filter */}
-          <div className="flex flex-wrap gap-2">
-            {ALL_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`text-xs font-bold uppercase tracking-[0.12em] px-4 py-2 border transition-all duration-200 ${
-                  activeCategory === cat
-                    ? "bg-navy-800 border-navy-800 text-white"
-                    : "border-steel-200 text-steel-600 hover:border-navy-800 hover:text-navy-800"
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="ml-2 text-steel-300 hover:text-steel-600 transition-colors text-sm leading-none"
+                >
+                  ×
+                </button>
+              )}
+            </div>
+
+            {/* Category tabs — horizontal scroll with scroll hint */}
+            <div className="relative flex-1 min-w-0">
+              {/* Scroll area */}
+              <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className="flex-1 overflow-x-auto scrollbar-hide"
+              >
+                <div className="flex items-stretch h-full min-w-max">
+                  {ALL_CATEGORIES.map((cat) => {
+                    const isActive = activeCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={`relative px-5 py-4 text-[0.65rem] font-bold uppercase tracking-[0.18em] whitespace-nowrap transition-all duration-200 border-b-2 ${
+                          isActive
+                            ? "text-navy-800 border-gold-500"
+                            : "text-steel-400 border-transparent hover:text-navy-800 hover:border-steel-300"
+                        }`}
+                      >
+                        {cat === "All" ? t("projects:filter.all") : cat}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Right scroll hint — fade + chevron */}
+              <div
+                className={`absolute right-0 top-0 bottom-0 flex items-center justify-end pointer-events-none transition-opacity duration-300 ${
+                  hasScrollHint ? "opacity-100" : "opacity-0"
                 }`}
               >
-                {cat === "All" ? t("projects:filter.all") : cat}
-              </button>
-            ))}
+                {/* Gradient fade */}
+                <div className="w-16 h-full bg-gradient-to-l from-white via-white/80 to-transparent" />
+                {/* Chevron arrow */}
+                <div className="absolute right-1 flex items-center gap-0.5">
+                  <svg
+                    className="w-3 h-3 text-gold-500 animate-pulse"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

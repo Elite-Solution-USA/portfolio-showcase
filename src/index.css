@@ -68,6 +68,15 @@
 
 /* ── Utility Classes ─────────────────────────────────────────── */
 @layer utilities {
+  /* Hide scrollbar but keep scroll functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Text clamping */
   .line-clamp-2 {
     display: -webkit-box;
