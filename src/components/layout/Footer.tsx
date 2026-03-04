@@ -100,6 +100,17 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Elite Solution USA LLC.{" "}
             {t("footer.rights")}
           </p>
+          {/* Franchise badge */}
+          <div className="flex items-center gap-2 border border-gold-500/20 px-3 py-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-gold-500" />
+            <span className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-gold-500/80">
+              Official SaasBizHub Franchise
+            </span>
+            <span className="text-steel-600 text-[0.6rem]">·</span>
+            <span className="text-[0.6rem] text-steel-500">
+              California, USA
+            </span>
+          </div>
           <p className="text-steel-500 text-xs">{t("footer.madeWith")}</p>
         </div>
       </div>

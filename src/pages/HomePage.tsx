@@ -106,6 +106,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── FRANCHISE TRUST BAR ──────────────────────────────────── */}
+      <div className="bg-navy-950 border-b border-white/5">
+        <div className="section-container py-3">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              {/* Verified badge + label */}
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-gold-500/20 border border-gold-500/40 flex-shrink-0">
+                  <svg
+                    className="w-3 h-3 text-gold-500"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold-500">
+                  Official SaasBizHub Franchise
+                </span>
+              </div>
+              {/* Divider */}
+              <div className="hidden sm:block h-3 w-px bg-white/10" />
+              <span className="hidden sm:block text-[0.65rem] text-steel-500 tracking-wide">
+                Headquartered in California, USA
+              </span>
+            </div>
+            <span className="text-[0.6rem] text-steel-600 tracking-wide hidden md:block">
+              Backed by a global software operations network
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* ── SERVICES OVERVIEW ─────────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="section-container">
