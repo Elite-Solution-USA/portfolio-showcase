@@ -53,9 +53,9 @@ export default function HomePage() {
           </div>
 
           {/* Headline */}
-          <h1 className="font-display text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-none mb-8 animate-fade-up delay-100">
+          <h1 className="font-display text-4xl sm:text-[2.75rem] md:text-5xl lg:text-6xl font-black text-white leading-tight mb-8 animate-fade-up delay-100">
             <span className="block">{t("home:hero.headline1")}</span>
-            <span className="block text-gold-500 mt-2 text-right">
+            <span className="block text-gold-500 mt-1 text-right">
               {t("home:hero.headline2")}
             </span>
           </h1>
