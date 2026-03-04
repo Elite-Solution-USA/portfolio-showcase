@@ -1040,6 +1040,7 @@ export const projects: Project[] = [
     gradientFrom: "#64748b",
     gradientTo: "#475569",
     icon: "🏛️",
+    logo: "/logos/citznhub.png",
     description: `A civic engagement platform that connects government agencies and community organizations with the residents they serve. CitizenHub streamlines service requests, community announcements, public feedback collection, and local resource directories — making it easy for citizens to find help and for agencies to respond efficiently.`,
     businessValue: `Bridges the gap between government services and the communities that need them. Agencies reduce call volume and walk-in traffic by moving common requests online, while residents get 24/7 access to information and real-time status updates on their submissions.`,
     kpis: [
