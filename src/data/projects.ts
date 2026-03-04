@@ -1190,6 +1190,7 @@ export const projects: Project[] = [
     gradientFrom: "#b91c1c",
     gradientTo: "#9f1239",
     icon: "🔐",
+    logo: "/logos/pressbailbonds.svg",
     description: `A complete digital platform for a bail bond agency, featuring a public-facing website for client intake, a backend case management system, a posting agent dashboard for managing active bonds in the field, and a dedicated dashboard for tracking agent commissions and reporting.`,
     businessValue: `Gives the agency full digital control over every stage of the bail bond process — from the first client inquiry through to bond posting and court compliance tracking. Agents in the field use the mobile-ready posting dashboard to update case status in real time, eliminating end-of-day paperwork.`,
     kpis: [
